@@ -19,6 +19,14 @@
     position: fixed;
     width:60%;
 }
+#map-overlay {
+      position:fixed;
+      left:10px;
+      bottom:475px;
+      width:200px;
+      height:150px;
+      border:1px solid #fff;
+  }
 #features {
     width: 40%;
     margin-left: 60%;
@@ -40,75 +48,82 @@ section:last-child {
     border-bottom: none;
     margin-bottom: 1500px;
 }
+.mapboxgl-ctrl-logo {
+  display: none;
+  visibility: hidden;
+}
 </style>
 
 <div id='map'></div>
+<div id='map-overlay'></div>
 <div id='features'>
-    <section id='columbia-lake' class='active'>
+    <section id='columbiaLake' class='active'>
         <h3>Columbia Lake</h3>
-        <p>The Columbia River gets its humble start here in beautiful British Columbia at 2,690 feet (820 m) above sea level.</p>
+        <p>The Columbia River gets its humble start here in beautiful British Columbia at 2,690 feet (820 m) above sea level.
+          <br><a href="javascript:goToLocation(columbiaLake)">go to</a>
+        </p>
     </section>
     <section id='kinbasket'>
         <h3>Heading North</h3>
         <p>The Columbia takes an interesting journey on its way to the Pacific Ocean - it starts by heading north towards Kinbasket Lake.</p>
     </section>
-    <section id='mica-dam'>
+    <section id='micaDam'>
         <h3>Mica Dam</h3>
         <p>Kinbasket Lake is formed by the remote Mica Dam.</p>
     </section>
-    <section id='revelstoke-dam'>
+    <section id='revelstokeDam'>
         <h3>Revelstoke Dam</h3>
         <p>test</p>
     </section>
-    <section id='keenleyside-dam'>
+    <section id='keenleysideDam'>
         <h3>Keenleyside Dam</h3>
         <p>test</p>
     </section>
-    <section id='grand-coulee-dam'>
+    <section id='grandCouleeDam'>
         <h3>Grand Coulee Dam</h3>
         <p>test</p>
     </section>
-    <section id='chief-joseph-dam'>
+    <section id='chiefJosephDam'>
         <h3>Chief Joseph Dam</h3>
         <p>test</p>
     </section>
-    <section id='wells-dam'>
+    <section id='wellsDam'>
         <h3>Wells Dam</h3>
         <p>test</p>
     </section>
-    <section id='rocky-reach-dam'>
+    <section id='rockyReachDam'>
         <h3>Rocky Reach Dam</h3>
         <p>test</p>
     </section>
-    <section id='rock-island-dam'>
+    <section id='rockIslandDam'>
         <h3>Rock Island Dam</h3>
         <p>test</p>
     </section>
-    <section id='wanapum-dam'>
+    <section id='wanapumDam'>
         <h3>Wanapum Dam</h3>
         <p>test</p>
     </section>
-    <section id='priest-rapids-dam'>
+    <section id='priestRapidsDam'>
         <h3>Priest Rapids Dam</h3>
         <p>test</p>
     </section>
-    <section id='mcnary-dam'>
+    <section id='mcnaryDam'>
         <h3>McNary Dam</h3>
         <p>test</p>
     </section>
-    <section id='john-day-dam'>
+    <section id='johnDayDam'>
         <h3>John Day Dam</h3>
         <p>test</p>
     </section>
-    <section id='wanapum-dam'>
+    <section id='wanapumDam'>
         <h3>Wanapum Dam</h3>
         <p>test</p>
     </section>
-    <section id='the-dalles-dam'>
+    <section id='theDallesDam'>
         <h3>The Dalles Dam</h3>
         <p>test</p>
     </section>
-    <section id='bonneville-dam'>
+    <section id='bonnevilleDam'>
         <h3>Bonneville Dam</h3>
         <p>test</p>
         <small id="citation">
@@ -116,156 +131,6 @@ section:last-child {
         </small>
     </section>
 </div>
-<script>
-/* TO DO:
-- add content
-*/
-mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZiIsImEiOiJjaWZ3bGhtdjgzMnN1dWdrcnEwZTVieG91In0.DkCY-91coDahKvpH7Z26dw';
-
-var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'mapbox://styles/samf/cjlgx20np04zo2rtcgm9d4j61',
-    center: [-115.850000, 50.216667],
-    zoom: 11.5,
-    bearing: 10,
-    pitch: 45
-});
-
-var chapters = {
-    'columbia-lake': {
-        bearing: 27,
-        center: [-115.850000, 50.216667],
-        zoom: 9.5,
-        pitch: 20
-    },
-    'kinbasket': {
-        duration: 6000,
-        center: [-118.077, 51.997],
-        bearing: 170,
-        zoom: 9.2,
-        pitch: 20
-    },
-    'mica-dam': {
-        bearing: 90,
-        center: [-118.566389, 52.077500],
-        zoom: 13,
-        speed: 0.6,
-        pitch: 40
-    },
-    'revelstoke-dam': {
-        bearing: 90,
-        center: [-118.193333, 51.049167],
-        zoom: 13.3
-    },
-    'keenleyside-dam': {
-        bearing: 45,
-        center: [-117.771667, 49.338333],
-        zoom: 15.3,
-        pitch: 20,
-        speed: 0.4
-    },
-    'grand-coulee-dam': {
-        bearing: 180,
-        center: [-118.9775, 47.957222],
-        zoom: 13.3
-    },
-    'chief-joseph-dam': {
-        bearing: 90,
-        center: [-119.638611, 47.995],
-        zoom: 17.3,
-        pitch: 40
-    },
-    'wells-dam': {
-        bearing: 90,
-        center: [-119.864167, 47.947222],
-        zoom: 14.3,
-        pitch: 20
-    },
-    'rocky-reach-dam': {
-        duration: 6000,
-        center: [-120.294722, 47.533056],
-        bearing: 170,
-        zoom: 13.2,
-        pitch: 20
-    },
-    'rock-island-dam': {
-        bearing: 90,
-        center: [-120.094444, 47.3425],
-        zoom: 13,
-        speed: 0.6,
-        pitch: 40
-    },
-    'wanapum-dam': {
-        bearing: 90,
-        center: [-119.970278, 46.877778],
-        zoom: 13.3
-    },
-    'priest-rapids-dam': {
-        bearing: 45,
-        center: [-119.91, 46.644167],
-        zoom: 15.3,
-        pitch: 20,
-        speed: 0.5
-    },
-    'mcnary-dam': {
-        duration: 6000,
-        center: [-119.298056, 45.935278],
-        bearing: 170,
-        zoom: 13.2,
-        pitch: 20
-    },
-    'john-day-dam': {
-        bearing: 90,
-        center: [-120.693611, 45.715833],
-        zoom: 13,
-        speed: 0.6,
-        pitch: 40
-    },
-    'the-dalles-dam': {
-        bearing: 90,
-        center: [-121.133889, 45.613889],
-        zoom: 13.3
-    },
-    'bonneville-dam': {
-        bearing: 45,
-        center: [-121.940833, 45.645],
-        zoom: 15.3,
-        pitch: 20,
-        speed: 0.5
-    },
-};
-
-// On every scroll event, check which element is on screen
-window.onscroll = function() {
-    var chapterNames = Object.keys(chapters);
-    for (var i = 0; i < chapterNames.length; i++) {
-        var chapterName = chapterNames[i];
-        if (isElementOnScreen(chapterName)) {
-            setActiveChapter(chapterName);
-            break;
-        }
-    }
-};
-
-var activeChapterName = 'columbia-lake';
-function setActiveChapter(chapterName) {
-    if (chapterName === activeChapterName) return;
-
-    map.flyTo(chapters[chapterName]);
-
-    document.getElementById(chapterName).setAttribute('class', 'active');
-    document.getElementById(activeChapterName).setAttribute('class', '');
-
-    activeChapterName = chapterName;
-}
-
-function isElementOnScreen(id) {
-    var element = document.getElementById(id);
-    var bounds = element.getBoundingClientRect();
-    return bounds.top < window.innerHeight && bounds.bottom > 0;
-}
-
-</script>
-
+<script src="map.js"></script>
 </body>
 </html>
