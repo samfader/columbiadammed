@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Columbia Dammed</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+</head>
+<body>
+
+<style>
+#map {
+    position: fixed;
+    width:60%;
+}
+#map-overlay {
+      position:fixed;
+      left:10px;
+      bottom:475px;
+      width:200px;
+      height:150px;
+      border:1px solid #fff;
+  }
+#features {
+    width: 40%;
+    margin-left: 60%;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  25px 50px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 13px;
+}
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 1500px;
+}
+.mapboxgl-ctrl-logo {
+  display: none;
+  visibility: hidden;
+}
+</style>
+
+<div id='map'></div>
+<div id='map-overlay'></div>
+<div id='features'>
+    <section id='columbiaLake' class='active'>
+        <h3>Columbia Lake</h3>
+        <p>The Columbia River gets its humble start here in beautiful British Columbia at 2,690 feet (820 m) above sea level.
+          <br><a href="javascript:goToLocation(columbiaLake)">go to</a>
+        </p>
+    </section>
+    <section id='kinbasket'>
+        <h3>Heading North</h3>
+        <p>The Columbia takes an interesting journey on its way to the Pacific Ocean - it starts by heading north towards Kinbasket Lake.</p>
+    </section>
+    <section id='micaDam'>
+        <h3>Mica Dam</h3>
+        <p>Kinbasket Lake is formed by the remote Mica Dam.</p>
+    </section>
+    <section id='revelstokeDam'>
+        <h3>Revelstoke Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='keenleysideDam'>
+        <h3>Keenleyside Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='grandCouleeDam'>
+        <h3>Grand Coulee Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='chiefJosephDam'>
+        <h3>Chief Joseph Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='wellsDam'>
+        <h3>Wells Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='rockyReachDam'>
+        <h3>Rocky Reach Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='rockIslandDam'>
+        <h3>Rock Island Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='wanapumDam'>
+        <h3>Wanapum Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='priestRapidsDam'>
+        <h3>Priest Rapids Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='mcnaryDam'>
+        <h3>McNary Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='johnDayDam'>
+        <h3>John Day Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='wanapumDam'>
+        <h3>Wanapum Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='theDallesDam'>
+        <h3>The Dalles Dam</h3>
+        <p>test</p>
+    </section>
+    <section id='bonnevilleDam'>
+        <h3>Bonneville Dam</h3>
+        <p>test</p>
+        <small id="citation">
+            Adapted from <a href='http://www.gutenberg.org/files/2346/2346-h/2346-h.htm'>Project Gutenberg</a>
+        </small>
+    </section>
+</div>
+<script src="map.js"></script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 /* TO DO:
 - add content
-- fix minimap
+- figure out how to scroll the sidebar when minimap point is clicked
 - add "intro" page that, when you scroll down, you get to the map
 */
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZiIsImEiOiJjaWZ3bGhtdjgzMnN1dWdrcnEwZTVieG91In0.DkCY-91coDahKvpH7Z26dw';
@@ -140,15 +140,14 @@ mapOverlay.on('click', 'columbia-dammed-full', function (e) {
   var features = mapOverlay.queryRenderedFeatures(bbox, { layers: ['columbia-dammed-full'] });
   var name = features[0].properties.name
   map.flyTo(chapters[name]);
-  setActiveChapter(name)
+  setActiveChapter(name);
+  // figure out here how to scroll
 });
 
- // Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
- mapOverlay.on('mouseenter', 'columbia-dammed-full', function () {
+mapOverlay.on('mouseenter', 'columbia-dammed-full', function () {
   mapOverlay.getCanvas().style.cursor = 'pointer';
 });
 
-// Change it back to a pointer when it leaves.
 mapOverlay.on('mouseleave', 'columbia-dammed-full', function () {
   mapOverlay.getCanvas().style.cursor = '';
 });
