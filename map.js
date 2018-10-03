@@ -135,21 +135,21 @@ var chapters = {
 };
 
 // when minimap icons are clicked, fly in main map to spot
-mapOverlay.on('click', 'columbia-dammed', function (e) {
+mapOverlay.on('click', 'columbia-dammed-full', function (e) {
   var bbox = [[e.point.x - 2, e.point.y - 2], [e.point.x + 2, e.point.y + 2]];
-  var features = mapOverlay.queryRenderedFeatures(bbox, { layers: ['columbia-dammed'] });
+  var features = mapOverlay.queryRenderedFeatures(bbox, { layers: ['columbia-dammed-full'] });
   var name = features[0].properties.name
-  console.log(name);
   map.flyTo(chapters[name]);
+  setActiveChapter(name)
 });
 
  // Change the cursor to a pointer when the it enters a feature in the 'symbols' layer.
- mapOverlay.on('mouseenter', 'columbia-dammed', function () {
+ mapOverlay.on('mouseenter', 'columbia-dammed-full', function () {
   mapOverlay.getCanvas().style.cursor = 'pointer';
 });
 
 // Change it back to a pointer when it leaves.
-mapOverlay.on('mouseleave', 'columbia-dammed', function () {
+mapOverlay.on('mouseleave', 'columbia-dammed-full', function () {
   mapOverlay.getCanvas().style.cursor = '';
 });
 
