@@ -1,0 +1,39 @@
+#map {
+    position: fixed;
+    width:60%;
+}
+#map-overlay {
+      position:fixed;
+      left:10px;
+      bottom:475px;
+      width:200px;
+      height:150px;
+      border:1px solid #fff;
+  }
+#features {
+    width: 40%;
+    margin-left: 60%;
+    font-family: 'Courier New', Courier, monospace;
+    overflow-y: scroll;
+    background-color: #fafafa;
+    filter: drop-shadow(0 0 10px #333);
+}
+section {
+    padding:  15px 40px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 15px;
+    
+}
+section.active {
+    opacity: 0.87;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 1170px;
+}
+.mapboxgl-ctrl-logo {
+  display: none;
+  visibility: hidden;
+}

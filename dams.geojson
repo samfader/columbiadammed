@@ -1,0 +1,229 @@
+{
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "chiefJosephDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -119.634021,
+          47.995751
+        ],
+        "type": "Point"
+      },
+      "id": "110707410ab218b2b1a42f63563d20fa"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "mcnaryDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -119.297816,
+          45.935367
+        ],
+        "type": "Point"
+      },
+      "id": "24ba4678e2cbb31a2575086c87d762a2"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "micaDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -118.561454,
+          52.076448
+        ],
+        "type": "Point"
+      },
+      "id": "47e0d0458f0e8a512e5221e3189b337b"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "revelstokeDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -118.196407,
+          51.049366
+        ],
+        "type": "Point"
+      },
+      "id": "4b775555267b9095f55a5ded6f470988"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "priestRapidsDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -119.910239,
+          46.644349
+        ],
+        "type": "Point"
+      },
+      "id": "528ad3694e22d8d028b8f43993709ff7"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "rockyReachDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -120.295746,
+          47.533329
+        ],
+        "type": "Point"
+      },
+      "id": "554747c3239c6420e5e3af5d74aa3df9"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "bonnevilleDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -121.940728,
+          45.64429
+        ],
+        "type": "Point"
+      },
+      "id": "65f92fc0195ea719f257f89b3d32a7ad"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "wanapumDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -119.971065,
+          46.874878
+        ],
+        "type": "Point"
+      },
+      "id": "841445e3e4a23c5da8137c7100cb4a3b"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "rockIslandDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -120.094412,
+          47.342475
+        ],
+        "type": "Point"
+      },
+      "id": "972768ac89c4e0022a9fe3279b9e6590"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "kinbasket"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.639621,
+          51.743987
+        ],
+        "type": "Point"
+      },
+      "id": "ac68625e60d02de67a9e525b44903da6"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "wellsDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -119.86486,
+          47.94709
+        ],
+        "type": "Point"
+      },
+      "id": "ac89083fba814865c08f6690874c8a16"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "johnDayDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -120.693259,
+          45.71581
+        ],
+        "type": "Point"
+      },
+      "id": "ba6a6fb26cbb367520eed4739aa2dde2"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "keenleysideDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -117.771872,
+          49.339454
+        ],
+        "type": "Point"
+      },
+      "id": "cde88cb4f84142bb4d7bdda6d785684b"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "theDallesDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -121.132254,
+          45.612937
+        ],
+        "type": "Point"
+      },
+      "id": "d15569d6fe0c1e629ed94828d016b674"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "columbiaLake"
+      },
+      "geometry": {
+        "coordinates": [
+          -116.003021,
+          50.465394
+        ],
+        "type": "Point"
+      },
+      "id": "d619f7952f6de89c4a780ab3b304827c"
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "grandCouleeDam"
+      },
+      "geometry": {
+        "coordinates": [
+          -118.977356,
+          47.956653
+        ],
+        "type": "Point"
+      },
+      "id": "e0e66f7b4649e8954fe0649880004d00"
+    }
+  ],
+  "type": "FeatureCollection"
+}

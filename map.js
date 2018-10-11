@@ -16,139 +16,61 @@ var map = new mapboxgl.Map({
 
 var mapOverlay = new mapboxgl.Map({
     container: 'map-overlay', // container id
-    style: 'mapbox://styles/samf/cjms84la95njz2rn7inpm05sx', // stylesheet location
+    style: 'mapbox://styles/samf/cjn25qz5d08si2rk6z7e35yl7', // stylesheet location
     center: [-119.864167, 48.947222], // starting position [lng, lat]
     zoom: 3.3, // starting zoom
     zoomControl: false,
     attributionControl: false
 });
 
-var chapters = {
-    'columbiaLake': {
-        bearing: 27,
-        center: [-115.850000, 50.216667],
-        zoom: 9.5,
-        pitch: 20
-    },
-    'kinbasket': {
-        duration: 6000,
-        center: [-118.077, 51.997],
-        bearing: 170,
-        zoom: 9.2,
-        pitch: 20
-    },
-    'micaDam': {
-        bearing: 90,
-        center: [-118.566389, 52.077500],
-        zoom: 13,
-        speed: 0.3,
-        pitch: 40
-    },
-    'revelstokeDam': {
-        bearing: 90,
-        center: [-118.193333, 51.049167],
-        zoom: 13.3,
-        speed: 0.2
-    },
-    'keenleysideDam': {
-        bearing: 45,
-        center: [-117.771667, 49.338333],
-        zoom: 15.3,
-        pitch: 20,
-        speed: 0.2
-    },
-    'grandCouleeDam': {
-        center: [-118.9775, 47.957222],
-        zoom: 13.3,
-        speed: 0.2
-    },
-    'chiefJosephDam': {
-        bearing: 90,
-        center: [-119.638611, 47.995],
-        zoom: 17.3,
-        pitch: 40,
-        speed: 0.2
-    },
-    'wellsDam': {
-        bearing: 90,
-        center: [-119.864167, 47.947222],
-        zoom: 14.3,
-        pitch: 20,
-        speed: 0.2
-    },
-    'rockyReachDam': {
-        duration: 6000,
-        center: [-120.294722, 47.533056],
-        bearing: 170,
-        zoom: 13.2,
-        pitch: 20,
-        speed: 0.2
-    },
-    'rockIslandDam': {
-        bearing: 90,
-        center: [-120.094444, 47.3425],
-        zoom: 13,
-        speed: 0.2,
-        pitch: 40
-    },
-    'wanapumDam': {
-        bearing: 90,
-        center: [-119.970278, 46.877778],
-        zoom: 13.3,
-        speed: 0.2
-    },
-    'priestRapidsDam': {
-        bearing: 45,
-        center: [-119.91, 46.644167],
-        zoom: 15.3,
-        pitch: 20,
-        speed: 0.2
-    },
-    'mcnaryDam': {
-        duration: 6000,
-        center: [-119.298056, 45.935278],
-        bearing: 170,
-        zoom: 13.2,
-        pitch: 20,
-        speed: 0.2
-    },
-    'johnDayDam': {
-        bearing: 90,
-        center: [-120.693611, 45.715833],
-        zoom: 13,
-        speed: 0.2,
-        pitch: 40
-    },
-    'theDallesDam': {
-        bearing: 90,
-        center: [-121.133889, 45.613889],
-        zoom: 13.3,
-        speed: 0.2
-    },
-    'bonnevilleDam': {
-        bearing: 45,
-        center: [-121.940833, 45.645],
-        zoom: 15.3,
-        pitch: 20,
-        speed: 0.2
-    },
-};
+var hoveredId = null;
+
+mapOverlay.on('load', function() {
+  mapOverlay.addSource('dams', {
+      'type': 'geojson',
+      'data': 'https://gist.githubusercontent.com/samfader/babbb3c429f77ce52764915f690037cc/raw/a16e8d49aee8312bcf4623b5230dbe280b7ed0f2/dams.geojson',
+      'generateId': true
+  });
+
+  mapOverlay.addLayer({
+      'id': 'dams-points',
+      'type': 'circle',
+      'source': 'dams',
+      'layout': {},
+      'paint': {
+        'circle-color': ['case',
+          ['boolean', ['feature-state', 'hover'], false],
+          '#e76e6e',
+          '#616161'
+        ]
+      }
+  });
+})
 
 // when minimap icons are clicked, fly in main map to spot
-mapOverlay.on('click', 'columbia-dammed-full', function (e) {
+mapOverlay.on('click', 'dams-points', function (e) {
   var bbox = [[e.point.x - 2, e.point.y - 2], [e.point.x + 2, e.point.y + 2]];
-  var features = mapOverlay.queryRenderedFeatures(bbox, { layers: ['columbia-dammed-full'] });
+  var features = mapOverlay.queryRenderedFeatures(bbox, { layers: ['dams-points'] });
   var name = features[0].properties.name
   map.flyTo(chapters[name]);
   setActiveChapter(name);
-  // figure out here how to scroll
+
+  // use feature-state to "light up" the circle that was clicked in minimap
+  if (features.length > 0) {
+    if (hoveredId) {
+      mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, { hover: false});
+    }
+    hoveredId = e.features[0].id;
+    mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, {hover: true});
+  }
+  // figure out here how to scroll properly
 });
 
-mapOverlay.on('mouseenter', 'columbia-dammed-full', function () {
+mapOverlay.on('mouseenter', 'dams-points', function () {
   mapOverlay.getCanvas().style.cursor = 'pointer';
 });
 
-mapOverlay.on('mouseleave', 'columbia-dammed-full', function () {
+mapOverlay.on('mouseleave', 'dams-points', function () {
   mapOverlay.getCanvas().style.cursor = '';
 });
 
@@ -158,7 +80,7 @@ window.onscroll = function() {
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
         if (isElementOnScreen(chapterName)) {
-            setActiveChapter(chapterName);
+            setActiveCircle(chapterName);
             break;
         }
     }
@@ -174,6 +96,20 @@ function setActiveChapter(chapterName) {
     document.getElementById(activeChapterName).setAttribute('class', '');
 
     activeChapterName = chapterName;
+}
+
+function setActiveCircle(chapterName){
+  var activeDam = mapOverlay.querySourceFeatures('dams', {
+    filter: ['in', 'name', chapterName]
+  });
+  if (hoveredId) {
+    mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, { hover: false});
+  }
+
+  hoveredId = activeDam[0].id;
+  mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, {hover: true});
+
+  console.log("active dam id is " + activeDam[0].id);
 }
 
 function isElementOnScreen(id) {

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Columbia Dammed</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+<div id='map'></div>
+<div id='map-overlay'></div>
+<div id='features'>
+    <section id='columbiaLake' class='active'>
+        <h3>Columbia Lake</h3>
+        <p>The Columbia River gets its humble start here in beautiful British Columbia at 2,690 feet (820 m) above sea level.</p>
+    </section>
+    <section id='micaDam'>
+        <h3>Mica Dam</h3>
+        <p>Mica Dam, a hydroelectric dam spanning the Columbia River 135 kilometres north of Revelstoke, British Columbia, Canada, was built as one of three Canadian projects under the terms of the 1964 Columbia River Treaty and is operated by BC Hydro. Completed in 1973 under the terms of the treaty, the Mica powerhouse had an original generating capacity of 1,805 megawatts (MW). Mica Dam, named after the nearby settlement of Mica Creek and its associated stream, in turn named after the abundance of mica minerals in the area, is one of the largest earthfill dams in the world. The reservoir for the dam is Kinbasket Lake, which was created when the dam was built. Water from the dam flows south directly into Revelstoke Lake, the reservoir for the Revelstoke Dam. Mica Dam is the tallest dam in Canada and second tallest in North America after the Chicoasén Dam in Mexico and it is the farthest upstream dam on the Columbia River.[5] The dam's underground powerhouse was the second largest in the world at the time of its construction, and was the first 500 kV installation of sulphur hexafluoride (SF6) insulated switchgear in the world.</p>
+    </section>
+    <section id='revelstokeDam'>
+        <h3>Revelstoke Dam</h3>
+        <p>The Revelstoke Dam, also known as Revelstoke Canyon Dam, is a hydroelectric dam spanning the Columbia River, 5 km (3.1 mi) north of Revelstoke, British Columbia, Canada. The powerhouse was completed in 1984 and has an installed capacity of 2480 MW.[3] Four generating units were installed initially, with one additional unit (#5) having come online in 2011. The reservoir behind the dam is named Lake Revelstoke.[4] The dam is operated by BC Hydro.</p>
+    </section>
+    <section id='keenleysideDam'>
+        <h3>Keenleyside Dam</h3>
+        <p>Hugh Keenleyside Dam (originally known as the High Arrow Dam[1] is a flood control dam spanning the Columbia River, 12 km (6.5 miles) upstream of the city of Castlegar, British Columbia, Canada.
+
+          The dam is at the outflow of what was the upper and lower Arrow Lakes, today the two lakes are joined forming one long reservoir extending 232 km (144 mi) north to Revelstoke Dam, and contains 8.76 km3 (7.1 MAF) of reservoir volume. The dam is operated by BC Hydro.[2]
+          
+          The 853.4 m (2,800 ft) long earth fill and concrete dam was built as part of fulfilling Canada's role in the Columbia River Treaty, along with the Duncan Dam, both were built to prevent flooding and control the flow of water in the Columbia River for downstream hydroelectric dams. It was commissioned on October 10, 1968, six months ahead of schedule.[2]
+          
+          Immediately downstream of the dam a 185 megawatt (MW) hydroelectric powerhouse, the Arrow Lakes Generating Station, was begun in 1999 and completed in 2002.[3] The station is owned by the Columbia Power Corporation.</p>
+    </section>
+    <section id='grandCouleeDam'>
+        <h3>Grand Coulee Dam</h3>
+        <p>Grand Coulee Dam is a concrete gravity dam on the Columbia River in the U.S. state of Washington, built to produce hydroelectric power and provide irrigation water. Constructed between 1933 and 1942, Grand Coulee originally had only two powerhouses. The third powerhouse, completed in 1974 to increase energy production, makes Grand Coulee the largest power station in the United States by nameplate-capacity at 6,809 MW.[7] However, in terms of yearly power production, Grand Coulee places fifth after a number of nuclear facilities to the south, like Palo Verde west of Phoenix. This is because river flow varies throughout the year. For example, while the dam may generate at nameplate-capacity in the spring, decreased river flow in the fall means less power can be generated the rest of the year, resulting in a lower capacity factor.</p>
+    </section>
+    <section id='chiefJosephDam'>
+        <h3>Chief Joseph Dam</h3>
+        <p>The Chief Joseph Dam is a concrete gravity dam on the Columbia River, 2.4 km (1.5 mi) upriver from Bridgeport, Washington. The dam is 877 km (545 mi) upriver from the mouth of the Columbia at Astoria, Oregon. It is operated by the USACE Chief Joseph Dam Project Office, and the electricity is marketed by the Bonneville Power Administration.</p>
+    </section>
+    <section id='wellsDam'>
+        <h3>Wells Dam</h3>
+        <p>Wells Dam is a hydroelectric dam located on the Columbia River, downstream from the confluence of the Okanogan River, Methow River, and the Columbia River in Washington state. The dam, associated structures, and machinery make up the Wells Hydroelectric Project. It is owned and operated by Douglas County Public Utility District.</p>
+    </section>
+    <section id='rockyReachDam'>
+        <h3>Rocky Reach Dam</h3>
+        <p>Rocky Reach Dam is a hydroelectric dam in the U.S. state of Washington owned and operated by Chelan County Public Utility District. It has 11 generators rated in total 1300 MW. The project is on the Columbia River in north central Washington state about seven miles (11 km) upstream from the city of Wenatchee. The dam is 473 miles (761 km) above the mouth of the Columbia. The reservoir impounded by the dam is Lake Entiat. The project provides energy for more than 7 million people throughout the Pacific Northwest.</p>    </section>
+    <section id='rockIslandDam'>
+        <h3>Rock Island Dam</h3>
+        <p>Rock Island Dam is a hydroelectric dam on the Columbia River in the U.S. state of Washington. Chelan County Public Utility District's Rock Island Dam and Hydro Project was the first dam to span the Columbia, having been built from 1929 to 1933. It is located near the geographical center of Washington, about 12 miles (19 km) downstream from the city of Wenatchee. By river, the dam is 235 miles (378 km) south of the Canada–US border and 453 miles (729 km) above the mouth of the river at Astoria, Oregon. The dam's reservoir is called Rock Island Pool.[3]</p>
+    </section>
+    <section id='wanapumDam'>
+        <h3>Wanapum Dam</h3>
+        <p>Wanapum Dam is a hydroelectric project located on the Columbia River downstream (south) from Vantage, Washington where Interstate 90 crosses the Columbia from Grant County into Kittitas County. It is owned by the Grant County Public Utility District. Its reservoir is named Lake Wanapum.
+
+          The dam, and its lake, are named after the Wanapum Indians. The dam has a rated capacity of 1,040 megawatts and annually generates over 4 million megawatt-hours.[3]</p>
+    </section>
+    <section id='priestRapidsDam'>
+        <h3>Priest Rapids Dam</h3>
+        <p>Priest Rapids Dam is a hydroelectric, concrete gravity dam; located on the Columbia River, between the Yakima Firing Range and the Hanford Nuclear Reservation, and bridges Yakima County and Grant County, in the U.S. state of Washington. The dam is 24 miles south of the town of Vantage, and 47 miles northwest of the city of Richland. It is located at mile marker 397.1 from the mouth of the Columbia. It is owned by the Grant County Public Utility District (PUD). Priest Rapids, for which the dam was named, are now submerged beneath the dam's reservoir.</p>
+    </section>
+    <section id='mcnaryDam'>
+        <h3>McNary Dam</h3>
+        <p>McNary Dam is a 1.4-mile (2.2-km) long concrete gravity run-of-the-river dam which spans the Columbia River. It joins Umatilla County, Oregon with Benton County, Washington, 292 miles (470 km) upriver from the mouth of the Columbia.[3] It is operated by the U.S. Army Corps of Engineers' McNary Lock and Dam office. The dam is located a mile (2 km) east of the town of Umatilla, Oregon, and 8 miles (13 km) north of Hermiston, Oregon. The dam was originally planned to be named Umatilla Dam, but the Flood Control Act of 1945 renamed the dam in honor of Senator Charles L. McNary of Oregon, who had died the previous year.</p>
+    </section>
+    <section id='johnDayDam'>
+        <h3>John Day Dam</h3>
+        <p>The John Day Dam is a concrete gravity run-of-the-river dam spanning the Columbia River in the northwestern United States.[2] The dam features a navigation lock plus fish ladders on both sides. The John Day Lock has the highest lift (110 feet) of any U.S. lock.[3] The reservoir impounded by the dam is Lake Umatilla,[4] and it runs 76.4 miles (123 kilometers) up the river channel to the foot of the McNary Dam. John Day Dam is part of the Columbia River Basin system of dams.</p>
+    </section>
+    <section id='wanapumDam'>
+        <h3>Wanapum Dam</h3>
+        <p>Wanapum Dam is a hydroelectric project located on the Columbia River downstream (south) from Vantage, Washington where Interstate 90 crosses the Columbia from Grant County into Kittitas County. It is owned by the Grant County Public Utility District. Its reservoir is named Lake Wanapum.
+
+          The dam, and its lake, are named after the Wanapum Indians. The dam has a rated capacity of 1,040 megawatts and annually generates over 4 million megawatt-hours.[3]oh</p>
+    </section>
+    <section id='theDallesDam'>
+        <h3>The Dalles Dam</h3>
+        <p>The Dalles Dam is a concrete-gravity run-of-the-river dam spanning the Columbia River, two miles (3 km) east of the city of The Dalles, Oregon, United States.[2] It joins Wasco County, Oregon with Klickitat County, Washington, 192 miles (309 km) upriver from the mouth of the Columbia near Astoria, Oregon. The closest towns on the Washington side are Dallesport and Wishram.</p>
+    </section>
+    <section id='bonnevilleDam'>
+        <h3>Bonneville Dam</h3>
+        <p>Bonneville Lock and Dam /ˈbɒnɪvɪl/ consists of several run-of-the-river dam structures that together complete a span of the Columbia River between the U.S. states of Oregon and Washington at River Mile 146.1.[5] The dam is located 40 miles (64 km) east of Portland, Oregon, in the Columbia River Gorge. The primary functions of Bonneville Lock and Dam are electrical power generation and river navigation. The dam was built and is managed by the United States Army Corps of Engineers. At the time of its construction in the 1930s it was the largest water impoundment project of its type in the nation, able to withstand flooding on an unprecedented scale.[6] Electrical power generated at Bonneville is distributed by the Bonneville Power Administration. Bonneville Lock and Dam is named for Army Capt. Benjamin Bonneville, an early explorer credited with charting much of the Oregon Trail. The Bonneville Dam Historic District was designated a National Historic Landmark District in 1987.[4]</p>
+        <small id="citation">
+            Need to property cite - all info from linked articles <a href="https://en.wikipedia.org/wiki/List_of_dams_in_the_Columbia_River_watershed#Main_stem_Columbia_River_dams">here</a>
+        </small>
+    </section>
+</div>
+<script src="map.js"></script>
+<script src="chapters.js"></script>
+</body>
+</html>
