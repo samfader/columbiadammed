@@ -80,6 +80,7 @@ window.onscroll = function() {
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
         if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
             setActiveCircle(chapterName);
             break;
         }
