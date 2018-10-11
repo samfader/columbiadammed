@@ -109,8 +109,6 @@ function setActiveCircle(chapterName){
 
   hoveredId = activeDam[0].id;
   mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, {hover: true});
-
-  console.log("active dam id is " + activeDam[0].id);
 }
 
 function isElementOnScreen(id) {
