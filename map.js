@@ -1,7 +1,16 @@
 /* TO DO:
 - add content
-- figure out how to scroll the sidebar when minimap point is clicked
+- figure out how to scroll the sidebar when minimap point is clicked - try https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
+- or https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll +
+- https://www.w3schools.com/jquery/css_scrolltop.asp
 - add "intro" page that, when you scroll down, you get to the map
+- refactor: have an object to store different states, like
+{
+  activeChapterDiv: "#blah",
+  activeCircle: blahCircle,
+...
+}
+then call all the relevant functions to do updates
 */
 mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZiIsImEiOiJjaWZ3bGhtdjgzMnN1dWdrcnEwZTVieG91In0.DkCY-91coDahKvpH7Z26dw';
 
@@ -9,9 +18,9 @@ var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/samf/cjlgx20np04zo2rtcgm9d4j61',
     center: [-115.850000, 50.216667],
+    bearing: 27,
     zoom: 11.5,
-    bearing: 10,
-    pitch: 45
+    pitch: 20
 });
 
 var mapOverlay = new mapboxgl.Map({
@@ -44,7 +53,9 @@ mapOverlay.on('load', function() {
           '#616161'
         ]
       }
+      
   });
+  mapOverlay.setFeatureState({source: 'dams', id: 14}, {hover: true});
 })
 
 // when minimap icons are clicked, fly in main map to spot
@@ -76,6 +87,7 @@ mapOverlay.on('mouseleave', 'dams-points', function () {
 
 // On every scroll event, check which element is on screen
 window.onscroll = function() {
+    mapOverlay.setFeatureState({source: 'dams', id: 14}, {hover: false});
     var chapterNames = Object.keys(chapters);
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
@@ -88,6 +100,7 @@ window.onscroll = function() {
 };
 
 var activeChapterName = 'columbiaLake';
+
 function setActiveChapter(chapterName) {
     if (chapterName === activeChapterName) return;
 
