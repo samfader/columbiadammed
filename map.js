@@ -3,7 +3,7 @@
 - figure out how to scroll the sidebar when minimap point is clicked - try https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
 - or https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll +
 - https://www.w3schools.com/jquery/css_scrolltop.asp
-- add "intro" page that, when you scroll down, you get to the map
+- - wanapum dam is broken
 - refactor: have an object to store different states, like
 {
   activeChapterDiv: "#blah",
@@ -12,7 +12,7 @@
 }
 then call all the relevant functions to do updates
 */
-mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZiIsImEiOiJjaWZ3bGhtdjgzMnN1dWdrcnEwZTVieG91In0.DkCY-91coDahKvpH7Z26dw';
+mapboxgl.accessToken = 'pk.eyJ1Ijoic2FtZiIsImEiOiJjam5raHU2ZHMxNjduM3FwbTk1YnprbTI3In0.TUnz9LTsWMbCVZJKIcg_Ow';
 
 var map = new mapboxgl.Map({
     container: 'map',
@@ -37,7 +37,7 @@ var hoveredId = null;
 mapOverlay.on('load', function() {
   mapOverlay.addSource('dams', {
       'type': 'geojson',
-      'data': 'https://gist.githubusercontent.com/samfader/babbb3c429f77ce52764915f690037cc/raw/a16e8d49aee8312bcf4623b5230dbe280b7ed0f2/dams.geojson',
+      'data': 'https://gist.githubusercontent.com/samfader/babbb3c429f77ce52764915f690037cc/raw/4bd494a87b40abfc3449e23e9a1cd9a0e9f9e397/dams.geojson',
       'generateId': true
   });
 
@@ -89,10 +89,12 @@ mapOverlay.on('mouseleave', 'dams-points', function () {
 window.onscroll = function() {
     mapOverlay.setFeatureState({source: 'dams', id: 14}, {hover: false});
     var chapterNames = Object.keys(chapters);
+    console.log(chapterNames);
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
         if (isElementOnScreen(chapterName)) {
             setActiveChapter(chapterName);
+            console.log(chapterName);
             setActiveCircle(chapterName);
             break;
         }
