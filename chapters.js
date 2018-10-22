@@ -45,7 +45,7 @@ var chapters = {
         speed: 0.3
     },
     'rockyReachDam': {
-        center: [-120.394722, 47.533056],
+        center: [-120.294424, 47.533264],
         bearing: 170,
         zoom: 15.2,
         pitch: 20,
