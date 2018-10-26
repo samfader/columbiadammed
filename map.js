@@ -1,9 +1,6 @@
 /* TO DO:
-- add content
-- figure out how to scroll the sidebar when minimap point is clicked - try https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollIntoView
-- or https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll +
-- https://www.w3schools.com/jquery/css_scrolltop.asp
-- - wanapum dam is broken
+- fix content
+- wanapum dam is broken
 - refactor: have an object to store different states, like
 {
   activeChapterDiv: "#blah",
@@ -74,7 +71,9 @@ mapOverlay.on('click', 'dams-points', function (e) {
     hoveredId = e.features[0].id;
     mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, {hover: true});
   }
-  // figure out here how to scroll properly
+  // scroll on sidebar when minimap clicked
+  var element = document.getElementById(name);
+  element.scrollIntoView();
 });
 
 mapOverlay.on('mouseenter', 'dams-points', function () {
@@ -89,12 +88,10 @@ mapOverlay.on('mouseleave', 'dams-points', function () {
 window.onscroll = function() {
     mapOverlay.setFeatureState({source: 'dams', id: 14}, {hover: false});
     var chapterNames = Object.keys(chapters);
-    console.log(chapterNames);
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
         if (isElementOnScreen(chapterName)) {
             setActiveChapter(chapterName);
-            console.log(chapterName);
             setActiveCircle(chapterName);
             break;
         }
