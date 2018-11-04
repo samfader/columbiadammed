@@ -58,6 +58,16 @@ section:last-child {
   padding: 20px;
 }
 
+.contentTop {
+  position: fixed;
+  bottom: 100;
+  background: rgba(0, 0, 0, 0.5);
+  font-family: 'Courier New', Courier, monospace;
+  color: #f1f1f1;
+  width: 50%;
+  padding: 20px;
+}
+
 /* Style the button used to pause/play the video */
 #myBtn {
   width: 200px;
@@ -73,4 +83,10 @@ section:last-child {
 #myBtn:hover {
   background: #ddd;
   color: black;
+}
+
+img.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
