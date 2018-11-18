@@ -1,6 +1,5 @@
 /* TO DO:
 - fix content
-- wanapum dam is broken
 - refactor: have an object to store different states, like
 {
   activeChapterDiv: "#blah",
@@ -29,7 +28,7 @@ var mapOverlay = new mapboxgl.Map({
     attributionControl: false
 });
 
-var hoveredId = null;
+var clickedId = null;
 
 mapOverlay.on('load', function() {
   mapOverlay.addSource('dams', {
@@ -45,35 +44,30 @@ mapOverlay.on('load', function() {
       'layout': {},
       'paint': {
         'circle-color': ['case',
-          ['boolean', ['feature-state', 'hover'], false],
+          ['boolean', ['feature-state', 'clicked'], false],
           '#e76e6e',
           '#616161'
         ]
       }
       
   });
-  mapOverlay.setFeatureState({source: 'dams', id: 14}, {hover: true});
+  mapOverlay.setFeatureState({source: 'dams', id: 14}, {clicked: true});
 })
 
 // when minimap icons are clicked, fly in main map to spot
 mapOverlay.on('click', 'dams-points', function (e) {
-  var bbox = [[e.point.x - 2, e.point.y - 2], [e.point.x + 2, e.point.y + 2]];
-  var features = mapOverlay.queryRenderedFeatures(bbox, { layers: ['dams-points'] });
+  var features = mapOverlay.queryRenderedFeatures(e.point, { layers: ['dams-points'] });
+  console.log("features are", JSON.stringify(features));
   var name = features[0].properties.name
+  console.log("name is ", name);
   map.flyTo(chapters[name]);
   setActiveChapter(name);
-
-  // use feature-state to "light up" the circle that was clicked in minimap
-  if (features.length > 0) {
-    if (hoveredId) {
-      mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, { hover: false});
-    }
-    hoveredId = e.features[0].id;
-    mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, {hover: true});
-  }
   // scroll on sidebar when minimap clicked
+  // have to do a bit of math to get scrollIntoView aligned NEAR the top, but not all the way at it
   var element = document.getElementById(name);
-  element.scrollIntoView();
+  element.scrollIntoView(true);
+  var viewportH = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  window.scrollBy(0, (element.getBoundingClientRect().height-viewportH)/40);
 });
 
 mapOverlay.on('mouseenter', 'dams-points', function () {
@@ -86,12 +80,13 @@ mapOverlay.on('mouseleave', 'dams-points', function () {
 
 // On every scroll event, check which element is on screen
 window.onscroll = function() {
-    mapOverlay.setFeatureState({source: 'dams', id: 14}, {hover: false});
+    mapOverlay.setFeatureState({source: 'dams', id: 14}, {clicked: false});
     var chapterNames = Object.keys(chapters);
     for (var i = 0; i < chapterNames.length; i++) {
         var chapterName = chapterNames[i];
         if (isElementOnScreen(chapterName)) {
             setActiveChapter(chapterName);
+            console.log("onscroll function chapter name is", chapterName);
             setActiveCircle(chapterName);
             break;
         }
@@ -115,12 +110,14 @@ function setActiveCircle(chapterName){
   var activeDam = mapOverlay.querySourceFeatures('dams', {
     filter: ['in', 'name', chapterName]
   });
-  if (hoveredId) {
-    mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, { hover: false});
-  }
 
-  hoveredId = activeDam[0].id;
-  mapOverlay.setFeatureState({source: 'dams', id: hoveredId}, {hover: true});
+  // unhighlight previously clicked circle
+  // bug still: chief joseph dam not working
+  mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: false});
+
+  // highlight clicked circle
+  clickedId = activeDam[0].id;
+  mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: true});
 }
 
 function isElementOnScreen(id) {
