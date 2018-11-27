@@ -12,12 +12,24 @@
 <!-- The video -->
 <video autoplay muted loop id="myVideo">
   <source src="assets/dam.mp4" type="video/mp4">
+    <p>Your browser does not support HTML5 video.</p>
 </video>
 
 <!-- Optional: some overlay text to describe the video -->
-
 <div class="contentTop">
   <p>"Every stream should be used to its utmost...Each river system from its headwaters in the forest to its mouth on the coast, is a single unit and should be treated as such." - President Theodore Roosevelt, 1908</p>
+</div>
+
+<div class ="audioControls">
+  <!-- The audio -->
+  Bing and Ruth <br> <i>The How of it Sped</i> <br><br>
+  <button onclick="playAudio()" id="myBtnSmall" type="button">Play</button>
+  <button onclick="pauseAudio()" id="myBtnSmall" type="button">Pause</button><br> 
+
+  <audio src="assets/thehowofitsped.mp3" autoplay id="myAudio">
+    <p>If you are reading this, it is because your browser does not support the audio element.     </p>
+  </audio>
+  
 </div>
 
 <div class="content">
@@ -26,3 +38,15 @@
   <a href="/columbiadammed/map.html"><button id="myBtn" onclick="myFunction()">Enter</button></a>
 </div>
 </html>
+
+<script> 
+  var audio = document.getElementById("myAudio"); 
+  
+  function playAudio() { 
+      audio.play(); 
+  } 
+  
+  function pauseAudio() { 
+      audio.pause(); 
+  } 
+</script> 

@@ -1,5 +1,6 @@
 /* TO DO:
 - fix content
+- set up some kind of loading spinner - https://jsbin.com/taqexahefu/1/edit?html,output?
 - refactor: have an object to store different states, like
 {
   activeChapterDiv: "#blah",
@@ -51,6 +52,22 @@ mapOverlay.on('load', function() {
       }
       
   });
+  // On every scroll event, check which element is on screen
+window.onscroll = function() {
+  mapOverlay.setFeatureState({source: 'dams', id: 14}, {clicked: false});
+  var chapterNames = Object.keys(chapters);
+  console.log("chapter names is", chapterNames)
+  for (var i = 0; i < chapterNames.length + 1; i++) {
+      var chapterName = chapterNames[i];
+      console.log("chapter name before iselementonscreen  is", chapterName)
+      if (isElementOnScreen(chapterName)) {
+        console.log("ok, now chapter name here is", chapterName)
+          setActiveChapter(chapterName);
+          setActiveCircle(chapterName);
+          break;
+      }
+  }
+};
   mapOverlay.setFeatureState({source: 'dams', id: 14}, {clicked: true});
 })
 
@@ -78,24 +95,10 @@ mapOverlay.on('mouseleave', 'dams-points', function () {
   mapOverlay.getCanvas().style.cursor = '';
 });
 
-// On every scroll event, check which element is on screen
-window.onscroll = function() {
-    mapOverlay.setFeatureState({source: 'dams', id: 14}, {clicked: false});
-    var chapterNames = Object.keys(chapters);
-    for (var i = 0; i < chapterNames.length; i++) {
-        var chapterName = chapterNames[i];
-        if (isElementOnScreen(chapterName)) {
-            setActiveChapter(chapterName);
-            console.log("onscroll function chapter name is", chapterName);
-            setActiveCircle(chapterName);
-            break;
-        }
-    }
-};
-
 var activeChapterName = 'columbiaLake';
 
 function setActiveChapter(chapterName) {
+  console.log("setActiveChapter chapter name and activeChapterName is", chapterName, activeChapterName)
     if (chapterName === activeChapterName) return;
 
     map.flyTo(chapters[chapterName]);
@@ -111,18 +114,20 @@ function setActiveCircle(chapterName){
     filter: ['in', 'name', chapterName]
   });
 
-  // unhighlight previously clicked circle
-  // bug still: chief joseph dam not working
-  mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: false});
+    // bug still: chief joseph dam not working
+    // bug: on first click console error since there is no clickedId (it's null)
+    // unhighlight previously clicked circle
+    mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: false});
 
-  // highlight clicked circle
-  clickedId = activeDam[0].id;
-  mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: true});
-}
+    // highlight clicked circle
+    clickedId = activeDam[0].id;
+    mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: true});
+};
 
 function isElementOnScreen(id) {
     var element = document.getElementById(id);
     var bounds = element.getBoundingClientRect();
+    console.log("id in isElementOnScreen is ", id)
     return bounds.top < window.innerHeight && bounds.bottom > 0;
 }
 
