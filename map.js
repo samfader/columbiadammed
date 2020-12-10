@@ -16,8 +16,8 @@ var map = new mapboxgl.Map({
     style: 'mapbox://styles/samf/cjlgx20np04zo2rtcgm9d4j61',
     center: [-115.850000, 50.216667],
     bearing: 27,
-    zoom: 11.5,
-    pitch: 20
+    zoom: 12.5,
+    pitch: 75
 });
 
 var mapOverlay = new mapboxgl.Map({
@@ -30,6 +30,28 @@ var mapOverlay = new mapboxgl.Map({
 });
 
 var clickedId = null;
+
+map.on('load', function () {
+  map.addSource('mapbox-dem', {
+    'type': 'raster-dem',
+    'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+    'tileSize': 512,
+    'maxzoom': 14
+    });
+    // add the DEM source as a terrain layer with exaggerated height
+    map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+     
+    // add a sky layer that will show when the map is highly pitched
+    map.addLayer({
+    'id': 'sky',
+    'type': 'sky',
+    'paint': {
+    'sky-type': 'atmosphere',
+    'sky-atmosphere-sun': [0.0, 0.0],
+    'sky-atmosphere-sun-intensity': 15
+    }
+    });
+});
 
 mapOverlay.on('load', function() {
   mapOverlay.addSource('dams', {
@@ -119,8 +141,9 @@ function setActiveCircle(chapterName){
     // unhighlight previously clicked circle
     mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: false});
 
-    // highlight clicked circle
     clickedId = activeDam[0].id;
+    // highlight clicked circle
+    // clickedId = activeDam[0].id;
     mapOverlay.setFeatureState({source: 'dams', id: clickedId}, {clicked: true});
 };
 
